@@ -1,0 +1,30 @@
+*{
+    box-sizing: border-box;
+}
+
+
+.Main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+}
+
+.sideBar{
+    display:flex;
+    flex-direction: column;
+    width: 20%;
+   
+    border-right: solid 1px lightgrey;
+
+}
+
+
+
+
+
+.notesList, .note{
+    width: 80%;
+    
+
+}

@@ -1,0 +1,12 @@
+*{
+    box-sizing: border-box;
+}
+
+
+.listNote{
+
+    width: 100%;
+    padding: 10px 0 10px 25px;
+    border: 1px solid violet;
+
+}
