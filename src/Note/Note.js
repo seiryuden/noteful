@@ -1,19 +1,30 @@
 import React from "react";
 import ListNote from "../ListNote/ListNote";
+import NotefulContext from "../NotefulContext";
 
 function Note(props){
 
     console.log(props);
-
+    
 
     return(
 
-        <div className="note">
-            <ListNote note={props.selectedNote}/>
-                
-            <p>{props.selectedNote.content}</p>            
+        <NotefulContext.Consumer>
+            {(value) => 
+                {return(
 
-        </div>
+                <div className="note">
+                <ListNote note={value.selectedNote}/>
+                    
+                <p>{value.selectedNote.content}</p>            
+
+                </div>
+                
+
+            )}
+            }
+            
+        </NotefulContext.Consumer>
 
 
 

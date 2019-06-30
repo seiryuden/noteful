@@ -1,13 +1,15 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import "./Folders.css";
+import NotefulContext from "../NotefulContext";
 
 class Folders extends React.Component{
+    static contextType = NotefulContext;
     
     
     onSelectFolder(id){
         
-        this.props.updateSelectedFolder(id)
+        this.context.updateSelectedFolder(id)
 
     }
 
@@ -15,19 +17,19 @@ class Folders extends React.Component{
     
     render(){
         
-        console.log(this.props)
-        const folders = this.props.folders.map((folder,i) => 
+        console.log(this.context)
+        const folders = this.context.folders.map((folder,i) => 
         
-        <Link to={`/folder/${folder.id}`} key={i}>
+        <NavLink to={`/folder/${folder.id}`} key={i}>
         
             <div className="folder">
                 
-                <label className={folder.id === this.props.selectedFolder ? "radioLabel selected" : "radioLabel"} htmlFor={folder.name} onClick={() => this.onSelectFolder(folder.id)}>
+                <label className="radioLabel" htmlFor={folder.name} onClick={() => this.onSelectFolder(folder.id)}>
                     <input type="radio" id={folder.name} className="radio" name="folder"  value={folder.name}/>
                     {folder.name}
                 </label>
             </div>
-        </Link>
+        </NavLink>
         );
 
 

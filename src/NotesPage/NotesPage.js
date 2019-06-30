@@ -16,11 +16,9 @@ class NotesPage extends React.Component{
                 <div className="sideBar">
                     <input type="button" className="backButton" onClick={this.props.history.goBack} value="Back"/>
                     <Folders 
-                        folders={this.props.folders} 
-                        selectedFolder={this.props.selectedFolder} 
-                        updateSelectedFolder={this.props.updateSelectedFolder}/>
+                        />
                 </div>
-                <Note selectedNote={this.props.selectedNote}
+                <Note 
                 />
 
             </div>

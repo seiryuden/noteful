@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "./ListNote.css";
+import Delete from "../Delete/Delete";
 
 function ListNote(props){
     
@@ -14,16 +15,11 @@ function ListNote(props){
     
 
     return(
-
-        <Link to={`/note/${props.noteId}`} onClick={() => clickOnNote()}>
-            <div className="listNote">
-                <h2>{props.note.name}</h2>
-                <p>{props.note.modified}</p>
-            </div>
-
-        </Link>
-
-
+        <div className="listNote">
+            <Link to={`/note/${props.noteId}`} onClick={() => clickOnNote()}><h2>{props.note.name}</h2></Link>
+            <p>{props.note.modified}</p>
+            <Delete noteId={props.noteId}/>
+        </div>
     )
 
 

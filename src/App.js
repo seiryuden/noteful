@@ -1,10 +1,10 @@
 import React from 'react';
-import {Route, Link} from "react-router-dom"
+import {Route, Link} from "react-router-dom";
 import './App.css';
-import Store from "./dummy-store";
 import MainPage from "./MainPage/MainPage";
 import FoldersPage from "./FoldersPage/FoldersPage";
 import NotesPage from "./NotesPage/NotesPage";
+import NotefulContext from "./NotefulContext";
 
 class App extends React.Component{
   
@@ -14,10 +14,11 @@ class App extends React.Component{
     
     this.state = {
 
-      folders: Store.folders,
-      notes: Store.notes,
+      folders: [],
+      notes: [],
       selectedFolder: "",
-      selectedNote: ""
+      selectedNote: "",
+      error: null
     }
 
   }
@@ -42,34 +43,88 @@ class App extends React.Component{
 
   }
 
+  updateNotes = (id)=>{
+
+    const filteredNotes = this.state.notes.filter(note => note.id != id);
+
+    this.setState({
+      notes: filteredNotes
+    })
+
+  }
+
+  componentDidMount() {
+
+    fetch("http://localhost:9090/folders", {
+      method: 'GET',
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.status)
+        }
+        return res.json()
+      })
+      .then(res => this.setState({
+        folders: res
+      })
+      )
+      .catch(error => this.setState({ error }))
+
+
+      fetch("http://localhost:9090/notes", {
+        method: "GET",
+      })
+        .then(res =>{
+          if(!res.ok){
+            throw new Error(res.status)
+          }
+          return res.json()
+        })
+        .then(res => this.setState({
+          notes: res
+
+        })
+        )
+        .catch(error => this.setState({error}))
+      
+  }
+
 
   render(){
-    
+
+    const contextValue={
+      folders: this.state.folders,
+      notes: this.state.notes,
+      selectedFolder: this.state.selectedFolder,
+      selectedNote: this.state.selectedNote,
+      updateSelectedFolder: this.updateSelectedFolder,
+      updateSelectedNote : this.updateSelectedNote,
+      updateNotes: this.updateNotes
+
+    }
+    console.log(this.state.notes)
     return (
       <main className="App">
         <div className="header">
           <Link to="/"><h1>Noteful</h1></Link>
         </div>
+        <NotefulContext.Provider value={contextValue}>
           <Route
             exact path="/"
             render={()=>
-              <MainPage folders={this.state.folders} notes={this.state.notes} selectedFolder="" updateSelectedFolder={(id) => this.updateSelectedFolder(id)} selectedNote={this.state.selectedNote} updateSelectedNote={(id)=> this.updateSelectedNote(id)}/>
+              <MainPage selectedFolder=""/>
             }
             />
           <Route
             exact path="/folder/:folderId"
-            render={()=>
-              <FoldersPage folders={this.state.folders} notes={this.state.notes} selectedFolder={this.state.selectedFolder} updateSelectedFolder={(id) => this.updateSelectedFolder(id)} selectedNote={this.state.selectedNote} updateSelectedNote={(id)=> this.updateSelectedNote(id)}/>
-            }
+            component={FoldersPage}
           />
 
           <Route
             exact path="/note/:noteId"
-            render={()=>
-              <NotesPage folders={this.state.folders} notes={this.state.notes} selectedFolder={this.state.selectedFolder} updateSelectedFolder={(id) => this.updateSelectedFolder(id)} selectedNote={this.state.selectedNote}/>
-            
-            }
+            component={NotesPage}
           />
+        </NotefulContext.Provider>
         
       </main>
     );

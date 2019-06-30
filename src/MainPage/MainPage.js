@@ -12,9 +12,9 @@ class MainPage extends React.Component{
         return (
         <div className="Main">
             <div className="sideBar">
-                <Folders folders={this.props.folders} updateSelectedFolder={this.props.updateSelectedFolder} selectedFolder={this.props.selectedFolder}></Folders>
+                <Folders selectedFolder={this.props.selectedFolder}></Folders>
             </div>
-            <NotesSection notes={this.props.notes} selectedFolder={this.props.selectedFolder} selectedNote={this.props.selectedNote} updateSelectedNote={this.props.updateSelectedNote}/>
+            <NotesSection selectedFolder={this.props.selectedFolder}/>
         
         </div>
         )

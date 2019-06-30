@@ -14,9 +14,9 @@ class FoldersPage extends React.Component{
 
             <div className="Main">
                 <div className="sideBar">
-                    <Folders folders={this.props.folders} updateSelectedFolder={this.props.updateSelectedFolder} selectedFolder={this.props.selectedFolder}></Folders>
+                    <Folders ></Folders>
                 </div>
-                <NotesSection notes={this.props.notes} selectedFolder={this.props.selectedFolder} selectedNote={this.props.selectedNote} updateSelectedNote={this.props.updateSelectedNote}/>
+                <NotesSection />
                 
             </div>
 
