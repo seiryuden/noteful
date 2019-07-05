@@ -11,7 +11,9 @@ class AddNote extends React.Component{
 
         super(props)
         this.state={
-            noteName: ""
+            noteName: "",
+            noteFolder: "",
+            noteContent: ""
         }
 
     }
@@ -24,10 +26,40 @@ class AddNote extends React.Component{
             noteName: name
 
         })
-        console.log(this.state.noteName)
+        
     }
 
+    updateNoteFolder = (folder)=>{
 
+        this.setState({
+            noteFolder: folder
+        })
+    }
+
+    updateNoteContent = (content) =>{
+
+        this.setState({
+
+            noteContent: content
+
+        })
+       
+    }
+
+    
+
+    validate(){
+
+        const name= this.state.noteName.trim();
+        const content= this.state.noteContent.trim();
+        const folder= this.state.noteFolder;
+
+        if(name.length === 0 || content.length === 0 || folder === ""){
+            return "Please fill in all the fields";
+        } 
+    }
+
+    
     handleSubmit = (e)=>{
 
         e.preventDefault();
@@ -62,18 +94,15 @@ class AddNote extends React.Component{
         )
         .catch(error => this.setState({error}))
 
-
-        
-        
-       
-        
     }
+
 
    onClickCancel = ()=>{
 
         this.props.history.push('/')
 
    }
+
 
     render(){
 
@@ -85,10 +114,11 @@ class AddNote extends React.Component{
                     onSubmit={this.handleSubmit}
                 >
                     <label htmlFor="noteName">Note Name:</label>
-                    <input type="text" name="noteName" id="noteName" placeholder="New Note" /*onChange={e => this.updateFolderName(e.target.value)}*/></input>
+                    <input type="text" name="noteName" id="noteName" placeholder="New Note" onChange={e => this.updateNoteName(e.target.value)}></input>
 
                     <label htmlFor="noteFolder">Note Folder:</label>
-                    <select type="selection" name="noteFolder" id="noteFolder" placeholder="Select Folder">
+                    <select type="selection" name="noteFolder" id="noteFolder" placeholder="Select Folder" onChange={e => this.updateNoteFolder(e.target.value)}>
+                        <option value="" hidden>Select folder</option>
                         {this.context.folders.map((folder,i)=>{
                             return(
                             <option key={i} value={folder.id}>{folder.name}</option>
@@ -98,9 +128,9 @@ class AddNote extends React.Component{
                     </select>
 
                     <label htmlFor="noteContent">Note Content:</label>
-                    <textarea name='noteContent' id='noteContent'/>
+                    <textarea name='noteContent' id='noteContent' onChange={e => this.updateNoteContent(e.target.value)}/>
                     <button type="button" onClick={this.onClickCancel} >Cancel</button>
-                    <button type="submit">Create</button>
+                    <button type="submit" disabled={this.validate()}>Create</button>
 
 
                 </form>
