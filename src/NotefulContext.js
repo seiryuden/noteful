@@ -8,7 +8,8 @@ const NotefulContext = React.createContext({
     selectedNote: "",
     updateSelectedFolder: () => {},
     updateSelectedNote : () =>{},
-    updateNotes: () =>{}
+    updateNotes: () =>{},
+    
     
 })
 

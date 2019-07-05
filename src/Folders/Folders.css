@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    overflow-wrap: break-word;
 }
 
 
@@ -24,6 +25,7 @@
      width: 100%;
      padding: 7px 0 7px 10px;
      cursor: pointer;
+     
      
 
 }

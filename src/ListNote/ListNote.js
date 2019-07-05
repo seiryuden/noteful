@@ -18,7 +18,7 @@ function ListNote(props){
         <div className="listNote">
             <Link to={`/note/${props.noteId}`} onClick={() => clickOnNote()}><h2>{props.note.name}</h2></Link>
             <p>{props.note.modified}</p>
-            <Delete noteId={props.noteId}/>
+            {props.deleteButton === "no" ? null : <Delete noteId={props.noteId}/>}
         </div>
     )
 
@@ -26,3 +26,5 @@ function ListNote(props){
 }
 
 export default ListNote;
+
+
