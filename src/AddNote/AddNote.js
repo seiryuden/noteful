@@ -54,7 +54,7 @@ class AddNote extends React.Component{
 
         const name= this.state.noteName.name.trim();
         const content= this.state.noteContent.content.trim();
-        const folder= this.state.noteFolder;
+        const folder= this.state.noteFolder.folder;
 
         if(name.length === 0 || content.length === 0 || folder === ""){
             return "Please fill in all the fields";
