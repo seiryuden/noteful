@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import NotefulContext from "../NotefulContext";
 import "./AddNote.css";
+import ValidationError from "../ValidationError/ValidationError";
+
 
 class AddNote extends React.Component{
 
@@ -11,9 +13,9 @@ class AddNote extends React.Component{
 
         super(props)
         this.state={
-            noteName: "",
-            noteFolder: "",
-            noteContent: ""
+            noteName: {name: "", touched: false},
+            noteFolder: {folder: "", touched: false},
+            noteContent: {content: "", touched: false}
         }
 
     }
@@ -23,7 +25,7 @@ class AddNote extends React.Component{
 
         this.setState({
 
-            noteName: name
+            noteName: {name: name, touched: true}
 
         })
         
@@ -32,7 +34,7 @@ class AddNote extends React.Component{
     updateNoteFolder = (folder)=>{
 
         this.setState({
-            noteFolder: folder
+            noteFolder: {folder: folder, touched: true}
         })
     }
 
@@ -40,7 +42,7 @@ class AddNote extends React.Component{
 
         this.setState({
 
-            noteContent: content
+            noteContent: {content: content, touched: true}
 
         })
        
@@ -50,8 +52,8 @@ class AddNote extends React.Component{
 
     validate(){
 
-        const name= this.state.noteName.trim();
-        const content= this.state.noteContent.trim();
+        const name= this.state.noteName.name.trim();
+        const content= this.state.noteContent.content.trim();
         const folder= this.state.noteFolder;
 
         if(name.length === 0 || content.length === 0 || folder === ""){
@@ -59,7 +61,7 @@ class AddNote extends React.Component{
         } 
     }
 
-    
+
     handleSubmit = (e)=>{
 
         e.preventDefault();
@@ -124,11 +126,12 @@ class AddNote extends React.Component{
                             <option key={i} value={folder.id}>{folder.name}</option>
                             )
                         })}
-                    
+
                     </select>
 
                     <label htmlFor="noteContent">Note Content:</label>
                     <textarea name='noteContent' id='noteContent' onChange={e => this.updateNoteContent(e.target.value)}/>
+                    {(this.state.noteName.touched || this.state.noteFolder.touched || this.state.noteContent.touched) && <ValidationError message={this.validate()}/>}
                     <button type="button" onClick={this.onClickCancel} >Cancel</button>
                     <button type="submit" disabled={this.validate()}>Create</button>
 

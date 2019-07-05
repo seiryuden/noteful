@@ -14,7 +14,8 @@ class AddFolder extends React.Component{
 
         super(props)
         this.state={
-            folderName: ""
+            folderName: "",
+            touched: false
         }
 
     }
@@ -24,10 +25,11 @@ class AddFolder extends React.Component{
 
         this.setState({
 
-            folderName: name
+            folderName: name,
+            touched: true
 
         })
-        console.log(this.state.folderName)
+        
     }
 
     validateName(){
@@ -89,7 +91,7 @@ class AddFolder extends React.Component{
                 >
                     <label htmlFor="folderName">Folder Name:</label>
                     <input type="text" name="folderName" id="folderName" placeholder="New folder" onChange={e => this.updateFolderName(e.target.value)} required></input>
-                    <ValidationError message={this.validateName()}/>
+                    {this.state.touched && <ValidationError message={this.validateName()}/>}
                     <button type="button" onClick={this.onClickCancel} >Cancel</button>
                     <button type="submit" disabled={this.validateName()}>Create</button>
 
