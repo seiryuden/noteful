@@ -3,6 +3,7 @@ import ListNote from "../ListNote/ListNote";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import NotefulContext from "../NotefulContext";
+import "./NotesSection.css";
 
 
 
@@ -24,7 +25,7 @@ function notesSection(props){
                 return(
                 <>
                 {list}
-                <Link to="/addnote">Add Note</Link>  
+                <Link className="addNoteButton" to="/addnote">Add Note</Link>  
                 </>
                 )
             }}

@@ -47,7 +47,6 @@ class AddNote extends React.Component{
         })
        
     }
-
     
 
     validate(){
@@ -110,31 +109,38 @@ class AddNote extends React.Component{
 
         return(
             <section  className="mainSection">
-                <h2>Create a Note</h2>
+                <h2 className="title">Create a Note</h2>
                 <form
-                    className="AddNote-form"
+                    className="addNoteForm"
                     onSubmit={this.handleSubmit}
                 >
-                    <label htmlFor="noteName">Note Name:</label>
-                    <input type="text" name="noteName" id="noteName" placeholder="New Note" onChange={e => this.updateNoteName(e.target.value)}></input>
+                    <fieldset>
+                        <legend>Note Data</legend>
+                        <label htmlFor="noteName">Note Name:</label>
+                        <input type="text" name="noteName" id="noteName" placeholder="New Note" onChange={e => this.updateNoteName(e.target.value)}></input>
 
-                    <label htmlFor="noteFolder">Note Folder:</label>
-                    <select type="selection" name="noteFolder" id="noteFolder" placeholder="Select Folder" onChange={e => this.updateNoteFolder(e.target.value)}>
-                        <option value="" hidden>Select folder</option>
-                        {this.context.folders.map((folder,i)=>{
-                            return(
-                            <option key={i} value={folder.id}>{folder.name}</option>
-                            )
-                        })}
+                        <label htmlFor="noteFolder">Note Folder:</label>
+                        <select type="selection" name="noteFolder" id="noteFolder" placeholder="Select Folder" onChange={e => this.updateNoteFolder(e.target.value)}>
+                            <option value="" hidden>Select folder</option>
+                            {this.context.folders.map((folder,i)=>{
+                                return(
+                                <option key={i} value={folder.id}>{folder.name}</option>
+                                )
+                            })}
 
-                    </select>
+                        </select>
+                        
+                        <div className="textAreaCont">
+                        <label htmlFor="noteContent">Note Content:</label>
 
-                    <label htmlFor="noteContent">Note Content:</label>
-                    <textarea name='noteContent' id='noteContent' onChange={e => this.updateNoteContent(e.target.value)}/>
-                    {(this.state.noteName.touched || this.state.noteFolder.touched || this.state.noteContent.touched) && <ValidationError message={this.validate()}/>}
-                    <button type="button" onClick={this.onClickCancel} >Cancel</button>
-                    <button type="submit" disabled={this.validate()}>Create</button>
-
+                            <textarea className="textArea" name='noteContent' id='noteContent' onChange={e => this.updateNoteContent(e.target.value)}/>
+                        </div>
+                        {(this.state.noteName.touched || this.state.noteFolder.touched || this.state.noteContent.touched) && <ValidationError message={this.validate()}/>}
+                    </fieldset>           
+                    <div className="buttonCont">
+                        <button type="button" onClick={this.onClickCancel} >Cancel</button>
+                        <button type="submit" disabled={this.validate()}>Create</button>
+                    </div>
 
                 </form>
             

@@ -39,3 +39,12 @@
 .active{
     background-color: orange;
 } 
+
+.addFolderButton{
+    background: rgb(178, 253, 134);
+    border: dotted blue 1.5px;
+    padding: 10px;
+    display: inline-block;
+    width: 130px;
+    margin: 15px;
+  }

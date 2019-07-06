@@ -1,0 +1,7 @@
+.addNoteButton{
+    background: rgb(187, 235, 253);
+    border: dotted blue 1.5px;
+    padding: 10px;
+    display: inline-block;
+    margin: 15px;
+  }

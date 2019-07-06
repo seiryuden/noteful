@@ -1,0 +1,27 @@
+.addNoteForm, .title{
+    
+    width: 100%;
+    padding: 10px 30px 5px;
+
+}
+
+label{
+
+    margin: 0 7px;
+
+}
+
+fieldset{
+    padding: 30px;
+}
+.buttonCont{
+    margin: 5px;
+    display: block;
+    
+
+}
+
+.textAreaCont, .textArea{
+    margin: 20px 0 10px;
+    display: block;
+}

@@ -41,7 +41,7 @@ class Folders extends React.Component{
         
             <div className="foldersCont">  
                 {folders}
-                <Link to="/addfolder">Add Folder</Link>  
+                <Link className="addFolderButton" to="/addfolder">Add Folder</Link>  
             </div>
         
     )

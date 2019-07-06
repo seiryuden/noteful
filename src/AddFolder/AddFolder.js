@@ -84,9 +84,9 @@ class AddFolder extends React.Component{
 
         return(
             <section  className="mainSection">
-                <h2>Create a Folder</h2>
+                <h2 className="title">Create a Folder</h2>
                 <form
-                    className="AddFolder-form"
+                    className="addFolderForm"
                     onSubmit={this.handleSubmit}
                 >
                     <label htmlFor="folderName">Folder Name:</label>

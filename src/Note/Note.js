@@ -1,6 +1,7 @@
 import React from "react";
 import ListNote from "../ListNote/ListNote";
 import NotefulContext from "../NotefulContext";
+import "./Note.css";
 
 
 
@@ -15,9 +16,9 @@ function Note(){
                 {return(
 
                 <div className="note">
-                <ListNote note={value.selectedNote} deleteButton="no"/>
+                <ListNote note={value.selectedNote} deleteButton="no" link="no"/>
                     
-                <p>{value.selectedNote.content}</p>            
+                <p className="content">{value.selectedNote.content}</p>            
 
                 </div>
                 
